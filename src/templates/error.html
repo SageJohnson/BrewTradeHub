@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block main %}
+    Sorry, you cannot accept your own offers.
+    <p />
+    Please, choose an option below:
+    <p />
+    <button type="button" class="button" onclick=simple_action("{{ url_for('catalog', sort_by = 5) }}")>Return to Catalog</button>
+    <button type="button" class="button" onclick=simple_action("{{ url_for('edit_offer') }}")>Return to Edit Offers</button>
+    <script type="text/javascript">
+        function simple_action(target) {
+            window.location = target
+        }
+    </script>
+<button type="button" class="button" onclick="simple_action('{{ url_for('signout') }}')">Sign Out</button>
+{% endblock %}

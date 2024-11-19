@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block main %}
+<p>Actions:</p>
+<button type="button" class="button" onclick="simple_action('{{ url_for('create_offer') }}')">Create Offer</button>
+<button type="button" class="button" onclick="simple_action('{{ url_for('edit_offer') }}')">Edit Offer</button>
+<button type="button" class="button" onclick="simple_action('{{ url_for('edit_offer') }}')">Your Listings</button>
+<br>
+<p>View Orders:</p>
+<button type="button" class="button" onclick="simple_action('{{ url_for('refresh_catalog') }}')">Opened</button>
+<button type="button" class="button" onclick="simple_action('{{ url_for('edit_offer') }}')">Accepted</button>
+<button type="button" class="button" onclick="simple_action('{{ url_for('edit_offer') }}')">Shipped</button>
+<button type="button" class="button" onclick="simple_action('{{ url_for('edit_offer') }}')">Received</button>
+<p>Sort By:
+<button type="button" class="button" onclick="simple_action('{{ url_for('catalog', sort_by=0) }}')">Desc.</button>
+<button type="button" class="button" onclick="simple_action('{{ url_for('catalog', sort_by=1) }}')">Year</button>
+<button type="button" class="button" onclick="simple_action('{{ url_for('catalog', sort_by=2) }}')">Type</button>
+<button type="button" class="button" onclick="simple_action('{{ url_for('catalog', sort_by=3) }}')">Brand</button>
+</p>
+<table id="offer-table">
+    <thead>
+        <tr>
+            <th>Description</th>
+            <th>Year</th>
+            <th>Type</th>
+            <th>Brand</th>
+            <th>Price</th>
+            <th>Action</th>
+            <th>Seller</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for offer in offers %}
+        {% if loop.index % 2 == 0 %}
+            <tr class ='even_row'>
+        {% else %}
+            <tr class = 'odd_row'>
+        {% endif %}
+            <td>{{offer.description}}</td>
+            <td>{{offer.year}}</td>
+            <td>{{offer.productType}}</td>
+            <td>{{offer.brand}}</td>
+            <td>{{offer.price}}</td>
+            <td><button type="button" class="button" onclick="simple_action('{{ url_for('confirmation', code = offer.code) }}')">Accept Offer</button></td>
+            <td><button type="button" class="button" onclick="simple_action('{{ url_for('profile', current_profile = offer.seller_id) }}')">Seller Profile</button></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<script>
+    function simple_action(target) {
+            window.location = target
+    }
+</script>
+<br>
+<button type="button" class="button" onclick="simple_action('{{ url_for('signout') }}')">Sign Out</button>
+{% endblock %}

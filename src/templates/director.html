@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block main %}
+    <p>This is the directory collection page for, You should only be seeing this if you are a developer.</p>
+    <p>Note: some pages require you to be logged in as a user.</p>
+    <p>Choose a page:</p>
+    <button type="button" class="button" onclick=simple_action("{{ url_for('login') }}")>/users/Login</button>
+    <button type="button" class="button" onclick=simple_action("{{ url_for('signup') }}")>/users/Sign Up</button>
+    <button type="button" class="button" onclick=simple_action("{{ url_for('catalog') }}")>/catalog</button>
+    <script type="text/javascript">
+        function simple_action(target) {
+            window.location = target
+        }
+    </script>
+{% endblock %}
